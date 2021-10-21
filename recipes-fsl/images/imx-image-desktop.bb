@@ -14,7 +14,7 @@ APTGET_CHROOT_DIR = "${IMAGE_ROOTFS}"
 APTGET_SKIP_UPGRADE = "1"
 
 ROOTFS_POSTPROCESS_COMMAND_append = "do_fix_ldconfig; do_save_graphics; do_save_cheese;  do_aptget_update; do_update_host; do_update_dns;"
-IMAGE_PREPROCESS_COMMAND_append = " do_fix_connman_conflict; do_enable_graphics; do_enable_cheese; do_cleanup_rootfs"
+IMAGE_PREPROCESS_COMMAND_append = " do_enable_graphics; do_enable_cheese; do_cleanup_rootfs do_tn_custom_rootfs"
 
 REQUIRED_DISTRO_FEATURES = "wayland"
 
@@ -291,6 +291,20 @@ do_cleanup_rootfs() {
 	if [ -e ${IMAGE_ROOTFS}/usr/bin/vsidaemon ]; then
 		mv ${IMAGE_ROOTFS}/usr/bin/vsidaemon ${IMAGE_ROOTFS}/usr/bin/vsidaemon.bak
 	fi
+
+	set +x
+}
+
+do_tn_custom_rootfs() {
+	set -x
+
+	# enable autologin
+	ENABLE_LINE=$(grep -rn "Enabling automatic login" ${IMAGE_ROOTFS}/etc/gdm3/custom.conf  | awk -F: '{print $1}')
+	ENABLE_LINE=$(expr $ENABLE_LINE + 1)
+	sed -i "$ENABLE_LINE s/^#\(.*\)/\1/" ${IMAGE_ROOTFS}/etc/gdm3/custom.conf
+	ENABLE_LINE=$(expr $ENABLE_LINE + 1)
+	sed -i "$ENABLE_LINE s/^#\(.*\)/\1/" ${IMAGE_ROOTFS}/etc/gdm3/custom.conf
+	sed -i "$ENABLE_LINE s/user1/ubuntu/" ${IMAGE_ROOTFS}/etc/gdm3/custom.conf
 
 	set +x
 }
