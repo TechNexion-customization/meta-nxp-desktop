@@ -306,6 +306,9 @@ do_tn_custom_rootfs() {
 	sed -i "$ENABLE_LINE s/^#\(.*\)/\1/" ${IMAGE_ROOTFS}/etc/gdm3/custom.conf
 	sed -i "$ENABLE_LINE s/user1/ubuntu/" ${IMAGE_ROOTFS}/etc/gdm3/custom.conf
 
+	# remove password requirement using sudo command
+	sed -i 's/sudo\tALL=(ALL:ALL) ALL/sudo\tALL=(ALL:ALL) NOPASSWD:ALL/' ${IMAGE_ROOTFS}/etc/sudoers
+
 	set +x
 }
 
