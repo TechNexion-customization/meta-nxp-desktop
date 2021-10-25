@@ -640,6 +640,9 @@ do_tn_custom_rootfs() {
 	# remove password requirement using sudo command
 	sed -i 's/sudo\tALL=(ALL:ALL) ALL/sudo\tALL=(ALL:ALL) NOPASSWD:ALL/' ${IMAGE_ROOTFS}/etc/sudoers
 
+	# reduce zram size
+	sed -i 's/totalmem\ \/\ 2/totalmem\ \/\ 4/' ${IMAGE_ROOTFS}/usr/bin/init-zram-swapping
+
 	set +x
 }
 
