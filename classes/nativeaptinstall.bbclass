@@ -78,6 +78,7 @@ APTGET_EXTRA_SOURCE_PACKAGES ?= ""
 APTGET_EXTRA_PACKAGES_SERVICES_DISABLED ?= ""
 APTGET_EXTRA_PACKAGES_RECONFIGURABLE ?= ""
 APTGET_EXTRA_PACKAGES_REMOVE ?= ""
+APTGET_EXTRA_PACKAGES_REINSTALL ?= "network-manager"
 
 # Parent recipes must define the path to the root filesystem to be updated
 APTGET_CHROOT_DIR ?= "${D}"
@@ -830,6 +831,8 @@ fakeroot aptget_update_end() {
 	if [ -n "${APTGET_EXTRA_PACKAGES_REMOVE}" ]; then
 	    chroot "${APTGET_CHROOT_DIR}" /usr/bin/dpkg --force-all -P ${APTGET_EXTRA_PACKAGES_REMOVE}
 	fi
+
+  aptget_run_aptget install --reinstall ${APTGET_EXTRA_PACKAGES_REINSTALL}
 }
 
 python do_aptget_update() {

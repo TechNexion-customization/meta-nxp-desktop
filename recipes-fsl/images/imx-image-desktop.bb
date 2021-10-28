@@ -80,9 +80,6 @@ IMAGE_FEATURES += " \
 
 #######
 
-APTGET_EXTRA_PACKAGES_SERVICES_DISABLED += "\
-	network-manager \
-"
 APTGET_EXTRA_PACKAGES += "\
 	console-setup locales \
 	patchelf \
