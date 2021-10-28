@@ -150,12 +150,6 @@ IMAGE_INSTALL += " \
     apitrace \
     gputop \
 "
-# isp
-IMAGE_INSTALL_append_mx8mp = " \
-    isp-imx \
-    basler-camera \
-    kernel-module-isp-vvcam \
-"
 
 IMAGE_INSTALL_remove_mx8mm = " \
     libgles3-imx-dev \
