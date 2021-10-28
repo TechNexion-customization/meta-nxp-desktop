@@ -125,7 +125,6 @@ DISTRO_NEVER_WRITE_PACKAGE_class-target += "\
     shared-mime-info \
     sqlite3 \
     readline \
-    util-linux \
     xz \
     zlib \
 "

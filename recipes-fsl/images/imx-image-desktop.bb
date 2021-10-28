@@ -91,9 +91,11 @@ APTGET_EXTRA_PACKAGES += "\
 	net-tools \
 	ntpdate \
 	nfs-common \
+	zram-config \
+	bash-completion \
+	cloud-utils \
 	openssh-server \
 	python3.9 libtool autoconf pkg-config \
-	bluez connman \
 	python-is-python3 \
 	libcairo2 libpixman-1-0 libpango-1.0-0 libpangocairo-1.0-0 \
 	squashfs-tools golang-github-snapcore-snapd-dev golang-github-ubuntu-core-snappy-dev \
